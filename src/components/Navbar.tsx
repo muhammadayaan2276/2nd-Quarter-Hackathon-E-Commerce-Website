@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -10,12 +9,11 @@ import Image from "next/image";
 import { SearchCommand } from "@/components/SearchBar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CartDropDown from "@/components/CartDropDown";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
-import { UserButton, useUser } from "@clerk/nextjs";
-import SignInButtonComponent from "@/components/auth/loginButoon";
 
 export default function Navbar() {
-  const {isSignedIn } = useUser();
+  const { isSignedIn } = useUser();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -29,8 +27,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`z-10 w-full mx-auto px-4 sm:px-6 md:px-16 lg:px-32 fixed text-xl ${
-        isScrolled ? "bg-white/70 backdrop-blur-sm shadow-md" : "bg-transparent"
+      className={`z-10 w-full mx-auto max-w-screen-xl px-6 md:px-16 lg:px-32  ${
+        isScrolled
+          ? "bg-amber-200 shadow-lg backdrop-blur-md"
+          : "bg-amber-200"
       }`}
     >
       <div className="flex items-center justify-between h-16">
@@ -39,8 +39,8 @@ export default function Navbar() {
           <Image src={"/logo.png"} alt="Logo" width={50} height={50} />
         </Link>
 
-        {/* Middle: Navigation Links (only for larger screens) */}
-        <nav className="hidden md:flex gap-x-12">
+        {/* Middle: Navigation Links */}
+        <nav className="hidden md:flex gap-x-8">
           <Link href="/" className="text-gray-800 hover:text-black">
             Home
           </Link>
@@ -55,70 +55,82 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Right: Icons (visible on all devices) */}
-        <div className="flex items-center space-x-5">
-          
-
-          {/* Search */}
-          <SearchCommand />
-
-          {/* Wishlist */}
-          <Link href="/wishlist" className="text-gray-800 hover:text-black">
-            <IoMdHeartEmpty size={20} />
-          </Link>
-
-          {/* Cart */}
-          <Sheet>
-            <SheetTrigger>
-              <IoCartOutline
-                size={20}
-                className="text-gray-800 hover:text-black"
-              />
-            </SheetTrigger>
-            <SheetContent>
-              <CartDropDown />
-            </SheetContent>
-          </Sheet>
-
+        {/* Right: Icons */}
+        <div className="flex items-center space-x-6">
           {/* Account */}
           {!isSignedIn ? (
-            <SignInButtonComponent  />
+            <SignInButton />
           ) : (
             <div className="flex justify-center items-center gap-2">
               <UserButton />
             </div>
           )}
 
-          {/* Hamburger Menu for Mobile */}
+          {/* Search */}
+          <SearchCommand />
+
+          {/* Wishlist */}
+          <Link href="/wishlist" className="text-gray-800 hover:text-black">
+            <IoMdHeartEmpty size={22} />
+          </Link>
+
+          {/* Cart */}
           <Sheet>
             <SheetTrigger>
-              <RxHamburgerMenu
-                size={20}
-                className="text-gray-800 hover:text-black md:hidden"
-              />
+              <IoCartOutline size={22} className="text-gray-800 hover:text-black" />
             </SheetTrigger>
-            <SheetContent className="p-4">
-              <nav className="space-y-8 text-lg mt-6">
-                <Link href="/" className="font-medium text-gray-900 block">
-                  Home
-                </Link>
-                <Link href="/shop" className="font-medium text-gray-900 block">
-                  Shop
-                </Link>
-                <Link href="/blog" className="font-medium text-gray-900 block">
-                  Blog
-                </Link>
-                <Link
-                  href="/contact"
-                  className="font-medium text-gray-900 block"
-                >
-                  Contact
-                </Link>
-              </nav>
+            <SheetContent>
+              <CartDropDown />
+            </SheetContent>
+          </Sheet>
+
+          {/* Hamburger Menu for Mobile */}
+          <div className=" flex flex-col h-full justify-between py-6">
+          <Sheet>
+            <SheetTrigger>
+              <RxHamburgerMenu size={22} className="text-gray-800 hover:text-black md:hidden" />
+            </SheetTrigger>
+            <SheetContent className="p-4 bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">
+            <ul className="flex flex-col gap-8 items-center text-white">
+            <li>
+              <Link
+                href="/"
+                className="text-2xl  font-semibold hover:text-black transition duration-300"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/shop"
+                className="text-2xl font-semibold  hover:text-black transition duration-300"
+              >
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className="text-2xl font-semibold  hover:text-black transition duration-300"
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="text-2xl font-semibold  hover:text-black transition duration-300"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
             </SheetContent>
           </Sheet>
         </div>
       </div>
+      </div>
     </header>
+    
   );
 }

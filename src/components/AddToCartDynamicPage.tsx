@@ -23,9 +23,9 @@ export default function AddTocartDynamicPage({ product }: { product: CartItem })
   return (
     <div className="flex items-center gap-4">
       {/* Quantity Selector */}
-      <div className="flex items-center border rounded-lg">
+      <div className="flex  items-center border rounded-lg">
         <button
-          className="px-4 py-2 border-r"
+          className="px-4 py-2 border-r hover:bg-amber-100"
           onClick={handleDecrease}
           disabled={quantity <= 1}
         >
@@ -37,7 +37,7 @@ export default function AddTocartDynamicPage({ product }: { product: CartItem })
           readOnly
           className="w-12 text-center border-none focus:outline-none"
         />
-        <button className="px-4 py-2 border-l" onClick={handleIncrease}>
+        <button className="px-4 py-2 border-l  hover:bg-amber-100" onClick={handleIncrease}>
           +
         </button>
       </div>

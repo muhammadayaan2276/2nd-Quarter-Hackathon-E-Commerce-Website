@@ -1,7 +1,7 @@
 "use client";
 
 import Service from "@/components/Service";
-import BreadCrumb from "@/components/BreadCrumb";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext"; // Import the custom hook
@@ -17,7 +17,27 @@ export default function Cart() {
 
   return (
     <div>
-      <BreadCrumb title="Cart" url="cart" />
+      <div className="relative w-full h-[300px] md:h-[390px] overflow-hidden">
+                 {/* Background Image */}
+                 <Image src="/Rectangle 1.png" alt="shop background" layout="fill" objectFit="cover" />
+         
+                 {/* Centered Content */}
+                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                   {/* Logo */}
+                   <Image src="/Meubel House_Logos-05.png" alt="logo" height={46} width={140} className="mx-auto -mb-4" />
+         
+                   {/* Shop Text */}
+                   <h1 className="text-4xl md:text-6xl text-[#000000] font-medium mb-5">Cart</h1>
+         
+                   <div className="flex justify-center items-center text-lg pb-16">
+                   <Link href="/">
+                  <h3 className="font-medium text-[14px] md:text-[16px] font-poppins text-[#000000]">Home</h3>
+                  </Link>
+                     <MdKeyboardArrowRight className="mx-2 w-[16px] md:w-[20px] h-[16px] md:h-[20px] text-[#000000]" />
+                     <h3 className='font-poppins text-[14px] md:text-[16px] font-[300] text-[#000000]'>Cart</h3>
+                   </div>
+                 </div>
+               </div>
       <div className="flex justify-center items-center mx-auto px-2 sm:px-4 md:px-8 lg:px-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -58,7 +78,7 @@ export default function Cart() {
                           <span className="ml-4 text-gray-700">{item.name}</span>
                         </td>
                         <td className="py-4 px-6 text-gray-700">
-                          Rs. {item.price.toLocaleString()}
+                         $ {item.price.toLocaleString()}
                         </td>
                         <td className="py-4 px-6">
                           <input
@@ -71,7 +91,7 @@ export default function Cart() {
                           />
                         </td>
                         <td className="py-4 px-6 text-gray-700">
-                          Rs. {(item.price * item.quantity).toLocaleString()}
+                          $ {(item.price * item.quantity).toLocaleString()}
                         </td>
                         <td className="py-4 px-6 text-red-500 cursor-pointer">
                           <button
@@ -117,7 +137,7 @@ export default function Cart() {
                         </div>
                         <div className="flex justify-between gap-4">
                           <p>Price:</p>
-                          <p>Rs. {item.price.toLocaleString()}</p>
+                          <p> $ {item.price.toLocaleString()}</p>
                         </div>
                         <div className="flex justify-between gap-4">
                           <p>Quantity:</p>
@@ -132,8 +152,7 @@ export default function Cart() {
                         </div>
                         <div className="flex justify-between gap-4">
                           <p>Subtotal:</p>
-                          <p>
-                            Rs. {(item.price * item.quantity).toLocaleString()}
+                          <p> $ {(item.price * item.quantity).toLocaleString()}
                           </p>
                         </div>
                         <button
@@ -160,11 +179,11 @@ export default function Cart() {
               </h2>
               <div className="flex justify-between text-gray-700 mb-2">
                 <span>Subtotal</span>
-                <span>Rs. {subtotal.toLocaleString()}</span>
+                <span> $ {subtotal.toLocaleString()}</span>
               </div>
               <div className="flex justify-between text-darkyellow font-bold text-lg">
                 <span>Total</span>
-                <span>Rs. {subtotal.toLocaleString()}</span>
+                <span> $ {subtotal.toLocaleString()}</span>
               </div>
               <Link href={"/checkout"}>
                 <button className="mt-6 w-full bg-lightyellow hover:bg-darkyellow text-black py-3 px-4 rounded shadow">

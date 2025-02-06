@@ -76,7 +76,7 @@ const [wishlist, setWishlist] = useState<boolean>(false);
             {name || "Unnamed Product"}
           </p>
           <h2 className="text-lg font-semibold text-gray-800">
-            Rs. {price ? price : "N/A"}.00
+            $ {price ? price : "N/A"}.00
           </h2>
         </Link>
 

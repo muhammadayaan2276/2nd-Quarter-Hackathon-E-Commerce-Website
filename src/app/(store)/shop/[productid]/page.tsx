@@ -1,12 +1,22 @@
+
 import Image from "next/image";
 import Link from "next/link";
-import BreadCrumb from "@/components/BreadCrumb";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import Service from "@/components/Service";
-import { CiInstagram, CiLinkedin, CiFacebook } from "react-icons/ci";
-import ShortSec from "@/components/ShortSec";
 import { getProductById } from "@/sanity/queries/FetchProduct";
 import { getFeaturedProduct } from "@/sanity/queries/FetchProduct";
 import AddTocartDynamicPage from "@/components/AddToCartDynamicPage";
+import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+import ReviewsAndRatings from "@/components/ReviewsAndRatings";
+import FAQAndHelpCenter from "@/components/FAQAndHelpCenter";
+import Detail from "@/components/Details";
+import ProductPage from "@/components/ProductPage";
+
+
+
+
+
+
 
 
 export default async function ProductDetail({
@@ -22,7 +32,27 @@ export default async function ProductDetail({
   console.log(product);
   return (
     <div>
-      <BreadCrumb title="Product Page" url="/" />
+      <div className="relative w-full h-[300px] md:h-[390px] overflow-hidden">
+                 {/* Background Image */}
+                 <Image src="/Rectangle 1.png" alt="shop background" layout="fill" objectFit="cover" />
+         
+                 {/* Centered Content */}
+                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                   {/* Logo */}
+                   <Image src="/Meubel House_Logos-05.png" alt="logo" height={46} width={140} className="mx-auto -mb-4" />
+         
+                   {/* Shop Text */}
+                   <h1 className="text-4xl md:text-6xl text-[#000000] font-medium mb-5">Product Detail</h1>
+         
+                   <div className="flex justify-center items-center text-lg pb-16">
+                   <Link href="/">
+                  <h3 className="font-medium text-[14px] md:text-[16px] font-poppins text-[#000000]">Home</h3>
+                  </Link>
+                     <MdKeyboardArrowRight className="mx-2 w-[16px] md:w-[20px] h-[16px] md:h-[20px] text-[#000000]" />
+                     <h3 className='font-poppins text-[14px] md:text-[16px] font-[300] text-[#000000]'>ProductDetail</h3>
+                   </div>
+                 </div>
+               </div>
       <div className=" mx-auto px-4 py-8">
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8 items-start">
           {/* Product Images */}
@@ -64,7 +94,8 @@ export default async function ProductDetail({
               <h1 className="text-2xl sm:text-3xl font-semibold">
                 {product?.name}
               </h1>
-              <p className="text-xl text-gray-700">Rs. {product?.price}.00</p>
+              <br />
+              <p className="text-xl  text-gray-700">$ {product?.price}.00</p>
             </div>
 
             {/* Rating */}
@@ -86,34 +117,33 @@ export default async function ProductDetail({
               {product?.description}
             </p>
 
-            {/* Size Selection */}
-            <div>
-              <span className="block text-sm font-medium text-gray-700">
-                Size
-              </span>
-              <div className="flex gap-2 mt-2">
-                {(product?.sizes || []).map((size) => (
-                  <button
-                    key={size}
-                    className="p-2 border rounded-lg flex items-center justify-center text-sm hover:bg-gray-100"
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
+           {/* Size Selection */}
+<div>
+  <span className="block text-sm font-medium text-gray-700">Size</span>
+  <div className="flex gap-2 mt-2 ">
+    {["S", "M", "L", "XL"].map((size) => (
+      <button
+        key={size}
+        className="p-3 border rounded-lg flex items-center justify-center text-sm bg-amber-100 hover:bg-red-300"
+      >
+        {size}
+      </button>
+    ))}
+  </div>
+</div>
 
-            {/* Color Selection
+
+             {/* Color Selection */}
             <div>
               <span className="block text-sm font-medium text-gray-700">
                 Color
               </span>
               <div className="flex gap-2 mt-2">
-                <button className="w-6 h-6 rounded-full bg-purple-600" />
-                <button className="w-6 h-6 rounded-full bg-black" />
-                <button className="w-6 h-6 rounded-full bg-yellow-700" />
+                <button className="w-7 h-7 rounded-full bg-purple-600" />
+                <button className="w-7 h-7 rounded-full bg-black" />
+                <button className="w-7 h-7 rounded-full bg-yellow-700" />
               </div>
-            </div> */}
+            </div> 
 
             {/* Quantity and Add to Cart */}
             {product && (
@@ -123,84 +153,117 @@ export default async function ProductDetail({
                   name: product.name,
                   image: product.imageUrl,
                   price: product.price,
-                  quantity: 1, // Default quantity
+                  quantity: 1, 
                   stock: product.stockLevel || 0, // Ensure stock is handled
                 }}
               />
             )}
-            {/* <div className="flex items-center gap-4">
-              <div className="flex items-center border rounded-lg">
-                <button className="px-4 py-2 border-r">-</button>
-                <input
-                  type="number"
-                  value="1"
-                  readOnly
-                  className="w-12 text-center border-none focus:outline-none"
-                />
-                <button className="px-4 py-2 border-l">+</button>
-              </div>
-              <button className="px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700">
-                Add To Cart
-              </button>
-            </div> */}
+           
 
             {/* Product Metadata */}
             <div className="space-y-2 pt-4 border-t text-sm text-gray-600">
               <div className="flex justify-between">
-                <span>SKU</span>
-                <span>{product?._id}</span>
+                <span className="text-lg">SKU</span>
+                <span className="text-lg">{product?._id}</span>
               </div>
               <div className="flex justify-between">
-                <span>Category</span>
-                <span>{product?.category}</span>
+              <span className="text-lg">Category</span>
+              <span className="text-lg">{product?.category}</span>
               </div>
               <div className="flex justify-between">
-                <span>Tags</span>
+              <span className="text-lg">Tags</span>
                 <span>{(product?.tags || []).join(', ')}</span>
               </div>
               <div className="flex justify-between">
-                <span>Share</span>
-                <div className="flex gap-2">
-                  <Link href="#" className="text-lg text-blue-600">
-                    <CiFacebook />
-                  </Link>
-                  <Link href="#" className="text-lg text-blue-500">
-                    <CiLinkedin />
-                  </Link>
-                  <Link href="#" className="text-lg text-pink-500">
-                    <CiInstagram />
-                  </Link>
-                </div>
+              <span className="text-lg">Share</span>
+                 {/* Social Sharing */}
+<div className="py-12 lg:py-0">
+  <div className="flex  lg:gap-6 justify-start">
+   
+    <div className="flex items-center gap-4">
+      {/* Facebook */}
+      <a
+        href="https://www.facebook.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#4267B2] p-2 rounded-full text-white"
+      >
+        <FaFacebook size={17} />
+      </a>
+
+      {/* YouTube */}
+      <a
+        href="https://www.youtube.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#FF0000] p-2 rounded-full text-white"
+      >
+        <FaYoutube size={17} />
+      </a>
+
+      {/* LinkedIn */}
+      <a
+        href="https://www.linkedin.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-[#0077b5] p-2 rounded-full text-white"
+      >
+        <FaLinkedin size={17} />
+      </a>
+      
+    </div>
+  </div>
+</div>
               </div>
             </div>
           </div>
         </div>
+        
 
         <hr className="text-[#FFFFFF] w-full my-2 mb-8 " />
         <div className="my-10 text-center">
           {/* Navigation Links */}
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-[14px] sm:text-[16px] md:text-[18px] font-medium text-[#9F9F9F]">
-            <p className="text-black font-semibold cursor-pointer hover:underline">
+            <p className="text-black text-3xl font-semibold cursor-pointer hover:underline">
               Description
             </p>
-            <p className="cursor-pointer hover:underline">
+            <p className="cursor-pointer text-3xl hover:underline">
               Additional Information
             </p>
-            <p className="cursor-pointer hover:underline">Reviews [5]</p>
+            <p className="cursor-pointer  text-3xl hover:underline">Reviews [5]</p>
           </div>
 
           {/* Description Section */}
-          <div className="grid gap-6 mt-6 text-[#9F9F9F] text-[14px] leading-[22px] sm:text-[16px] sm:leading-[26px] md:text-[18px] md:leading-[30px] px-4 sm:px-8 md:px-16 lg:px-24">
+          <div className="grid gap-6 mt-6 text-[#9F9F9F]  text-[14px] leading-[22px] sm:text-[16px] sm:leading-[26px] md:text-[18px] md:leading-[30px] px-4 sm:px-8 md:px-16 lg:px-24">
             <p>{product?.description}</p>
           </div>
         </div>
+        
       </div>
+      <div className="bg-gray-200 min-h-screen p-8">
+        {/* Header Section */}
+        <div className=" text-center mb-6 md:mb-8 border-4 border-black  bg-gradient-to-r from-pink-500 to-amber-100 p-6 rounded-lg">
+  <h1 className=" text-3xl md:text-4xl font-bold text-gray-800 lg:text-3xl">
+    Product Overview
+  </h1>
+  <p className="text-sm sm:text-base md:text-lg text-white font-semibold mt-2">
+    Explore all the details, FAQs, and reviews for this product.
+  </p>
+</div>
 
-      <ShortSec
-        title="More Products"
-        description="find a bright ideal to suit your taste with our great selection of suspension, floor and table lights"
-        cardData={featuredData}
-      />
+      <div className="max-w-3xl mx-auto">
+        <ReviewsAndRatings />
+        <br />
+        <br />
+        <FAQAndHelpCenter />
+        <br />
+        <br />
+      <Detail/>
+      <br />
+      </div>
+    </div>
+  <ProductPage/>
+  
       <Service />
     </div>
   );

@@ -1,8 +1,10 @@
+'use client'
 import Link from "next/link";
+import SubscriptionForm from "./SubscriptionManagement";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 text-gray-800 w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-white text-gray-800 w-full mx-auto px-4 sm:px-6 lg:px-8">
       <div className="container mx-auto px-4 py-8">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row  gap-8">
@@ -66,19 +68,7 @@ export default function Footer() {
             {/* Newsletter Section */}
             <div>
               <p className="font-bold text-lg mb-4">Newsletter</p>
-              <form className="flex flex-col space-y-2">
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
-                />
-                <button
-                  type="submit"
-                  className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800"
-                >
-                  Subscribe
-                </button>
-              </form>
+              <SubscriptionForm/>
             </div>
           </div>
         </div>

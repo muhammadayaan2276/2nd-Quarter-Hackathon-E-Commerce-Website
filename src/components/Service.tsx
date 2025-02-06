@@ -1,21 +1,30 @@
 export default function Service (){
 
     return(
-        <div className="mx-auto px-4 sm:px-6 md:px-16 lg:px-32 flex bg-lightreddish justify-center items-center">
-            <div className="flex justify-center items-center gap-8 mx-auto py-16 space-y-5 flex-wrap">
-                <div className=" w-[250px] gap-2 flex flex-col  justify-center">
-                    <h1 className="text-4xl">Free Delivery</h1>
-                    <p className="text-xl">For all orders over $50 consctetur adipim scing elit</p>
-                </div>
-                <div className=" w-[250px] gap-2 flex flex-col  justify-center">
-                    <h1 className="text-4xl">90 Days Return</h1>
-                    <p className="text-xl">For all orders over $50 consctetur adipim scing elit</p>
-                </div>
-                <div className=" w-[250px] gap-2 flex flex-col  justify-center">
-                    <h1 className="text-4xl">Secure Payment</h1>
-                    <p className="text-xl">For all orders over $50 consctetur adipim scing elit</p>
-                </div>
-            </div>
+<div>
+     {/* Additional Information Section */}
+     <div className="bg-[#FAF4F4] w-full py-[40px] mb-8 md:mb-8 md:py-[80px] border-t border-b border-gray-200">
+        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-center px-6">
+          <div className="max-w-xs mx-auto">
+            <h3 className="font-poppins text-[#000000] text-lg md:text-[26px] text-nowrap font-semibold mb-2">Free Delivery</h3>
+            <p className="text-[#9F9F9F] font-poppins text-sm md:text-[20px] font-normal leading-tight">
+              For all orders over $50, consectetur adipiscing elit.
+            </p>
+          </div>
+          <div className="max-w-xs mx-auto">
+            <h3 className="font-poppins text-[#000000] text-lg md:text-[26px] text-nowrap font-semibold mb-2">90 Days Return</h3>
+            <p className="text-[#9F9F9F] font-poppins text-sm md:text-[20px] text-wrap font-normal leading-tight">
+              If goods have problems, consectetur adipiscing elit.
+            </p>
+          </div>
+          <div className="max-w-xs mx-auto">
+            <h3 className="font-poppins text-[#000000] text-lg md:text-[26px] text-nowrap font-semibold mb-2">Secure Payment</h3>
+            <p className="text-[#9F9F9F] font-poppins text-sm md:text-[20px] font-normal leading-tight">
+              100% secure payment, consectetur adipiscing elit.
+            </p>
+          </div>
         </div>
+      </div>
+</div>
     )
 }

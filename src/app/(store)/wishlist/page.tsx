@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Service from "@/components/Service";
-import BreadCrumb from "@/components/BreadCrumb";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import { useWishlist } from "@/context/CartContext"; // Assuming you've created WishlistContext for global state management
 import { FaHeart } from "react-icons/fa";
 import Image from "next/image";
@@ -13,8 +13,27 @@ export default function MyAccount() {
 
   return (
     <div className="">
-      {/* Breadcrumb Section */}
-      <BreadCrumb title="My Wishlist" url="wishlist" />
+      <div className="relative w-full h-[300px] md:h-[390px] overflow-hidden">
+                 {/* Background Image */}
+                 <Image src="/Rectangle 1.png" alt="shop background" layout="fill" objectFit="cover" />
+         
+                 {/* Centered Content */}
+                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                   {/* Logo */}
+                   <Image src="/Meubel House_Logos-05.png" alt="logo" height={46} width={140} className="mx-auto -mb-4" />
+         
+                   {/* Shop Text */}
+                   <h1 className="text-4xl md:text-6xl text-[#000000] font-medium mb-5">Wishlist</h1>
+         
+                   <div className="flex justify-center items-center text-lg pb-16">
+                   <Link href="/">
+                  <h3 className="font-medium text-[14px] md:text-[16px] font-poppins text-[#000000]">Home</h3>
+                  </Link>
+                     <MdKeyboardArrowRight className="mx-2 w-[16px] md:w-[20px] h-[16px] md:h-[20px] text-[#000000]" />
+                     <h3 className='font-poppins text-[14px] md:text-[16px] font-[300] text-[#000000]'>Wishlist</h3>
+                   </div>
+                 </div>
+               </div>
 
       {/* Wishlist Section */}
       <div className="mt-12 flex flex-col items-center justify-center space-y-8">
@@ -70,7 +89,7 @@ export default function MyAccount() {
               ))
             ) : (
               <div className="col-span-full text-center">
-                <p className="text-gray-600">
+                <p className="text-amber-200 font-normal text-lg">
                   Your wishlist is empty. Start adding some favorites!
                 </p>
               </div>
@@ -78,7 +97,9 @@ export default function MyAccount() {
           </div>
         </div>
       </div>
-
+<br />
+<br />
+<br />
       {/* Service Section */}
       <Service />
     </div>
