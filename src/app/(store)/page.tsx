@@ -1,13 +1,11 @@
 import HeroSection from "../../components/HeroSection";
 import HeroTwo from "../../components/Herotwo";
-import ProductPage from "../../components/ProductPage";
+
 import NewArrivals from "../../components/NewArrivals";
 import BlogSection from "../../components/OurBlogs"
 import OurInstagram from "../../components/Instagram";
-
-
-
 import { getFeaturedProduct } from "@/sanity/queries/FetchProduct";
+import Productpage from "../../components/ProductPage";
 
 
 
@@ -17,7 +15,7 @@ export default async function Home() {
     <div>
       <HeroSection />
       <HeroTwo />
-  <ProductPage/>
+<Productpage/>
 <OurInstagram/>
       <NewArrivals/>
       <BlogSection/>

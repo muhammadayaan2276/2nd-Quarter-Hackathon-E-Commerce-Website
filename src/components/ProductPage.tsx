@@ -1,87 +1,78 @@
-'use client'
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { client } from '@/sanity/lib/client';
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 
-// Define the Product interface
-interface Product {
-  _id: string;
-  name: string;
-  image: {
-    asset: {
-      _id: string;
-      url: string;
-    };
-  };
-  category: string;
-  price: number;
-  description: string;
-  stockLevel: number;
-  imagePath: string;
-  discountPercentage: number;
-  isFeaturedProduct: number;
-}
+const Productpage = () => {
+  const items = [
+    {
+      Name: "Trenton Modular Sofa_3",
+      Price: "Rs. 25,000.00",
+      Image: "/Bed.png",
+    },
+    {
+      Name: "Granite Dining Table with Dining Chair",
+      Price: "Rs. 25,000.00",
+      Image: "/Chairs.png",
+    },
+    {
+      Name: "Outdoor Bar Table and Stool",
+      Price: "Rs. 25,000.00",
+      Image: "/Bartable.png",
+    },
+    {
+      Name: "Plain Console with Teak Mirror",
+      Price: "Rs. 25,000.00",
+      Image: "/Mirror.png",
+    },
+  ];
 
-// Fetch products from Sanity
-async function fetchProducts(): Promise<Product[]> {
-  const query = `*[_type == "product"]{
-    category,
-    _id,
-    price,
-    description,
-    stockLevel,
-    imagePath,
-    discountPercentage,
-    isFeaturedProduct,
-    name,
-    image {
-      asset->{
-        _id,
-        url
-      }
-    }
-  }`;
-
-  const products = await client.fetch(query);
-  return products;
-}
-
-// Define the RelatedProducts component
-const RelatedProducts: React.FC<{ products: Product[] }> = ({ products }) => {
   return (
-    <div>
-      <h2 className="text-3xl font-bold mb-4 text-center ">Related Products</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.slice(0, 4).map((product) => (
-          <Link href={`/shop/${product._id}`} key={product._id}>
-            <div className="p-4 cursor-pointer hover:shadow-lg transition-shadow border rounded-lg">
-              <div className="relative w-full h-[250px] sm:h-[300px] overflow-hidden bg-gray-200 rounded-t-lg">
-                {product.image?.asset?.url ? (
-                  <Image
-                    src={product.image.asset.url}
-                    alt={product.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-t-lg"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-sm text-gray-500">
-                    No image available
-                  </div>
-                )}
-              </div>
-              <h2 className="text-lg sm:text-xl font-medium text-center mt-2">{product.name}</h2>
-              <p className="text-center text-lg sm:text-xl font-bold">${product.price}</p>
-            </div>
-          </Link>
-        ))}
+    <div className="w-full h-auto bg-[#F3F4F6] py-[50px] px-4">
+      {/* Title Section */}
+      <div className="w-full text-center mb-[30px]">
+        <h1 className="font-poppins text-[36px] md:text-[40px] font-medium text-[#000000]">
+         Related Products
+        </h1>
+        <p className="font-poppins text-[16px] md:text-[18px] font-medium text-[#9F9F9F] mt-[10px] max-w-[800px] mx-auto">
+          Find a bright ideal to suit your taste with our great selection of suspension, floor, and table lights.
+        </p>
       </div>
 
-      {/* "View More" Button Navigating to /shop */}
-      <div className="text-center mt-4">
+      {/* Horizontal Scrollable Section */}
+      <div className="w-full overflow-x-auto">
+        <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-[20px] px-[10px] sm:px-[20px] md:px-[50px] justify-center sm:justify-start">
+          {items.map((item, index) => (
+            <div
+              key={index}
+              className="w-full sm:w-1/2 md:w-10/12 lg:w-1/4 bg-[#FFFFFF] rounded-md shadow-lg p-[20px] text-center"
+            >
+              {/* Image Section */}
+              <Image
+                src={item.Image}
+                alt={item.Name}
+                width={200}
+                height={200}
+                className="w-full h-[200px] object-cover rounded-md"
+              />
+
+              {/* Item Details */}
+              <div className="mt-[20px]">
+                <h2 className="text-[18px] md:text-[20px] font-semibold text-[#000000]">
+                  {item.Name}
+                </h2>
+                <p className="text-[16px] md:text-[18px] font-medium text-[#000000] mt-[5px]">
+                  {item.Price}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* View More Button */}
+      <div className="w-full text-center mt-[50px] md:pr-20">
         <Link href="/shop">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+          <button className="w-[154px] h-[50px] bg-amber-200 hover:bg-amber-100 font-poppins text-nowrap text-[18px] md:text-[20px] font-medium text-[#000000] mx-auto border-2 border-[#000000] py-2 px-4 rounded-[5px]">
             View More
           </button>
         </Link>
@@ -90,25 +81,4 @@ const RelatedProducts: React.FC<{ products: Product[] }> = ({ products }) => {
   );
 };
 
-// Define the ProductPage component
-const ProductPage: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  useEffect(() => {
-    async function getProducts() {
-      const data = await fetchProducts();
-      setProducts(data);
-    }
-    getProducts();
-  }, []);
-
-  return (
-    <div>
-      <div className="container mx-auto px-4 py-8">
-        <RelatedProducts products={products} />
-      </div>
-    </div>
-  );
-};
-
-export default ProductPage;
+export default Productpage;
