@@ -10,14 +10,10 @@ import { IoSearch } from "react-icons/io5";
 import { useState } from 'react';
 import Service from '@/components/Service';
 
-const Blog = ({ onSearch }: { onSearch: (searchTerm: string) => void }) => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Blog = () => {
+ 
 
-  const handleSearch = () => {
-    if (searchTerm.trim()) {
-      onSearch(searchTerm);
-    }
-  };
+
 
 
   return (
@@ -162,7 +158,7 @@ const Blog = ({ onSearch }: { onSearch: (searchTerm: string) => void }) => {
 
     <div className="flex mb-8 border-2 border-gray-300 rounded-md h-12 w-72 ">
       {/* Search Button */}
-      <button onClick={handleSearch} className="p-2">
+      <button className="p-2">
         <IoSearch className="text-black" size={24} />
       </button> 
 
@@ -170,8 +166,6 @@ const Blog = ({ onSearch }: { onSearch: (searchTerm: string) => void }) => {
         <input
         type="text"
         placeholder="Search products..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
         className="w-full h-full px-2 outline-none text-black"
       />
       
