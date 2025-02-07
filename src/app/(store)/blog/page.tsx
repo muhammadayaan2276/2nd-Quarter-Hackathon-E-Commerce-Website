@@ -9,11 +9,8 @@ import { FaTag } from "react-icons/fa";
 import { IoSearch } from "react-icons/io5";
 import { useState } from 'react';
 import Service from '@/components/Service';
-type BlogProps = {
-  onSearch: (searchTerm: string) => void;
-};
 
-const Blog = ({ onSearch }: BlogProps) => {
+const Blog = ({ onSearch }: { onSearch: (searchTerm: string) => void }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = () => {
