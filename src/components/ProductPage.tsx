@@ -49,16 +49,11 @@ async function fetchProducts(): Promise<Product[]> {
 
 // Define the RelatedProducts component
 const RelatedProducts: React.FC<{ products: Product[] }> = ({ products }) => {
-  const [showAll, setShowAll] = useState(false);
-
-  // Limit displayed products to 4 initially
-  const displayedProducts = showAll ? products : products.slice(0, 4);
-
   return (
     <div>
       <h2 className="text-3xl font-bold mb-4 text-center ">Related Products</h2>
-      <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {displayedProducts.map((product) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.slice(0, 4).map((product) => (
           <Link href={`/shop/${product._id}`} key={product._id}>
             <div className="p-4 cursor-pointer hover:shadow-lg transition-shadow border rounded-lg">
               <div className="relative w-full h-[250px] sm:h-[300px] overflow-hidden bg-gray-200 rounded-t-lg">
@@ -83,14 +78,13 @@ const RelatedProducts: React.FC<{ products: Product[] }> = ({ products }) => {
         ))}
       </div>
 
-      {/* "View More" Button */}
+      {/* "View More" Button Navigating to /shop */}
       <div className="text-center mt-4">
-        <button
-          onClick={() => setShowAll(!showAll)}
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-        >
-          {showAll ? 'View Less' : 'View More'}
-        </button>
+        <Link href="/shop">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+            View More
+          </button>
+        </Link>
       </div>
     </div>
   );
@@ -110,7 +104,6 @@ const ProductPage: React.FC = () => {
 
   return (
     <div>
-      {/* Other product page content */}
       <div className="container mx-auto px-4 py-8">
         <RelatedProducts products={products} />
       </div>
